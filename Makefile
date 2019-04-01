@@ -6,7 +6,48 @@ SOURCES += src/app.c
 
 INCLUDES += -Iinclude -I
 
-LIB = lib/launchpad_pro.a
+LIB += lib/c_init.o
+LIB += lib/c_manager.o
+LIB += lib/c_midi.o
+LIB += lib/c_surface.o
+LIB += lib/colours.o
+LIB += lib/core_cm3.o
+LIB += lib/cx_adc.o
+LIB += lib/cx_fifo.o
+LIB += lib/cx_fifo1k.o
+LIB += lib/cx_midi_parser.o
+LIB += lib/cx_pad.o
+LIB += lib/cx_switch.o
+LIB += lib/device_init.o
+LIB += lib/main.o
+LIB += lib/misc.o
+LIB += lib/startup_stm32f10x_md.o
+LIB += lib/stm32f10x_adc.o
+LIB += lib/stm32f10x_bkp.o
+LIB += lib/stm32f10x_dma.o
+LIB += lib/stm32f10x_exti.o
+LIB += lib/stm32f10x_flash.o
+LIB += lib/stm32f10x_gpio.o
+LIB += lib/stm32f10x_it.o
+LIB += lib/stm32f10x_pwr.o
+LIB += lib/stm32f10x_rcc.o
+LIB += lib/stm32f10x_spi.o
+LIB += lib/stm32f10x_tim.o
+LIB += lib/stm32f10x_usart.o
+LIB += lib/system_stm32f10x.o
+LIB += lib/usb.o
+LIB += lib/usb_core.o
+LIB += lib/usb_desc.o
+LIB += lib/usb_endp.o
+LIB += lib/usb_init.o
+LIB += lib/usb_int.o
+LIB += lib/usb_istr.o
+LIB += lib/usb_mem.o
+LIB += lib/usb_prop.o
+LIB += lib/usb_pwr.o
+LIB += lib/usb_regs.o
+LIB += lib/usb_sil.o
+
 
 OBJECTS = $(addprefix $(BUILDDIR)/, $(addsuffix .o, $(basename $(SOURCES))))
 
@@ -52,7 +93,7 @@ $(SIMULATOR):
 $(HEX): $(ELF)
 	$(OBJCOPY) -O ihex $< $@
 
-$(ELF): $(OBJECTS)
+$(ELF): $(OBJECTS) $(LIB)
 	$(LD) $(LDFLAGS) -o $@ $(OBJECTS) $(LIB)
 
 DEPENDS := $(OBJECTS:.o=.d)
